@@ -1,0 +1,31 @@
+{
+  "name": "m3u8-to-mp4",
+  "version": "1.0.0",
+  "description": "Script to batch convert m3u8 files to mp4 videos",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:MarxZhou/m3u8_to_mp4.git"
+  },
+  "keywords": [
+    "m3u8"
+  ],
+  "author": "MarxZhou",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
