@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 
 const { sep } = path;
 
-const { inputPath, outputPath, tempPath, saveM3u8File } = require('./config');
+const { inputPath, outputPath, tempPath, saveM3u8File, outputFileType } = require('./config');
 
 if (!fs.existsSync(tempPath)) {
   fs.mkdirSync(tempPath);
@@ -34,7 +34,7 @@ m3u8Files.forEach(value => {
 
   process.chdir(tempPath);
 
-  const outputFilePath = `${outputPath}/${value.slice(0, value.length - 5)}.mp4`;
+  const outputFilePath = `${outputPath}/${value.slice(0, value.length - 5)}.${outputFileType}`;
 
   if (fs.existsSync(outputFilePath)) {
     fs.unlinkSync(outputFilePath);
