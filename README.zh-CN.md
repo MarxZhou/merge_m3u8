@@ -27,13 +27,13 @@
 可以通过内置脚本启动
 
 ```shell
-npm start;
+npm start
 ```
 
 也可以通过 node 直接启动入口文件
 
 ```shell
-node ./src/index.js;
+node ./src/index.js
 ```
 
 

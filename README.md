@@ -27,13 +27,13 @@ You need to install FFmpeg and it has been configured with environment variables
 Can be launched via built-in script
 
 ```shell
-npm start;
+npm start
 ```
 
 You can also start the entry file directly through node
 
 ```shell
-node ./src/index;
+node ./src/index
 ```
 
 ## Special attention
