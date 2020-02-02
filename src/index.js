@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
+const chance = require('chance');
 
 const { execSync } = require('child_process');
 
@@ -12,15 +13,40 @@ if (!fs.existsSync(tempPath)) {
   fs.mkdirSync(tempPath);
 }
 
-const m3u8Files = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
+let m3u8Files = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
+
+const isIncludedErrorFileName = !m3u8Files.every(value => !/\s/g.test(value));
+
+if (isIncludedErrorFileName) {
+  m3u8Files.forEach(value => {
+    if (/^\s/.test(value)) {
+      fs.renameSync(`${inputPath}/${value}`, `${inputPath}/${value.replace(/\s/, '')}`);
+    }
+  });
+
+  m3u8Files = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
+}
 
 m3u8Files.forEach(value => {
   const m3u8File = fs.readFileSync(inputPath + sep + value, 'utf8');
 
-  const keyUri = m3u8File.match(/URI="(.*)"/)[1].split('/');
-  const newKeyUri = `${inputPath}/${keyUri.slice(keyUri.length - 2).join('/')}`;
+  let keyUri = '';
+  let newKeyUri = '';
+  let newM3u8File;
 
-  const newM3u8File = m3u8File.replace(/URI="(.*)"/, `URI="${newKeyUri}"`).replace(/\/.*\/\//g, `${inputPath}/`);
+  const guid = value || chance.guid();
+
+  console.log('guid:', guid);
+
+  const isEncrypted = m3u8File.match(/URI="(.*)"/);
+
+  if (isEncrypted) {
+    keyUri = m3u8File.match(/URI="(.*)"/)[1].split('/');
+    newKeyUri = `${inputPath}/${keyUri.slice(keyUri.length - 2).join('/')}`;
+    newM3u8File = m3u8File.replace(/URI="(.*)"/, `URI="${newKeyUri}"`).replace(/\/.*\/\//g, `${inputPath}/`);
+  } else {
+    newM3u8File = m3u8File.replace(/\/.*\/\//g, `${inputPath}/`);
+  }
 
   const tempFilePath = `${tempPath}/${value}`;
 
@@ -32,19 +58,19 @@ m3u8Files.forEach(value => {
 
   console.log(`${chalk.blueBright('正在转换中：')}${value}`);
 
-  process.chdir(tempPath);
-
-  const outputFilePath = `${outputPath}/${value.slice(0, value.length - 5)}.${outputFileType}`;
+  const outputFilePath = `${outputPath}/${value.slice(0, value.length - 5) || guid}.${outputFileType}`;
 
   if (fs.existsSync(outputFilePath)) {
     fs.unlinkSync(outputFilePath);
   }
 
+  process.chdir(tempPath);
+
   execSync(`ffmpeg -allowed_extensions ALL -i ${value} ${outputFilePath}`);
 
   process.chdir(__dirname);
 
-  console.log(`${chalk.greenBright('文件转换完成：')}${value}`);
+  console.log(`${chalk.greenBright('文件转换完成：')}${guid}`);
 });
 
 const deleteFolderRecursive = path => {
