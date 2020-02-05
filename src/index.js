@@ -1,11 +1,8 @@
 const fs = require('fs');
-const path = require('path');
 const chalk = require('chalk');
 const chance = require('chance');
 
 const { execSync } = require('child_process');
-
-const { sep } = path;
 
 const { inputPath, outputPath, tempPath, saveM3u8File, outputFileType } = require('./config');
 
@@ -13,30 +10,24 @@ if (!fs.existsSync(tempPath)) {
   fs.mkdirSync(tempPath);
 }
 
-let m3u8Files = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
-
-const isIncludedErrorFileName = !m3u8Files.every(value => !/\s/g.test(value));
-
-if (isIncludedErrorFileName) {
-  m3u8Files.forEach(value => {
-    if (/^\s/.test(value)) {
-      fs.renameSync(`${inputPath}/${value}`, `${inputPath}/${value.replace(/\s/, '')}`);
-    }
-  });
-
-  m3u8Files = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
-}
+const m3u8Files = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
 
 m3u8Files.forEach(value => {
-  const m3u8File = fs.readFileSync(inputPath + sep + value, 'utf8');
+  const newFileName = value.replace(/[^\u4e00-\u9fa5A-Za-z0-9_.]/, '');
+
+  fs.copyFileSync(`${inputPath}/${value}`, `${tempPath}/${newFileName}`);
+});
+
+const tempM3u8Files = fs.readdirSync(tempPath).filter(value => value.endsWith('.m3u8'));
+
+tempM3u8Files.forEach(value => {
+  const m3u8File = fs.readFileSync(`${inputPath}/${value}`, 'utf8');
 
   let keyUri = '';
   let newKeyUri = '';
   let newM3u8File;
 
   const guid = value || chance.guid();
-
-  console.log('guid:', guid);
 
   const isEncrypted = m3u8File.match(/URI="(.*)"/);
 
@@ -48,13 +39,9 @@ m3u8Files.forEach(value => {
     newM3u8File = m3u8File.replace(/\/.*\/\//g, `${inputPath}/`);
   }
 
-  const tempFilePath = `${tempPath}/${value}`;
+  const tempFile = `${tempPath}/${value}`;
 
-  if (fs.existsSync(tempFilePath)) {
-    fs.unlinkSync(tempFilePath);
-  }
-
-  fs.writeFileSync(tempFilePath, newM3u8File);
+  fs.writeFileSync(tempFile, newM3u8File, { flag: 'r+' });
 
   console.log(`${chalk.blueBright('正在转换中：')}${value}`);
 
