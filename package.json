@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:MarxZhou/m3u8_to_mp4.git"
+    "url": "git@github.com:MarxZhou/merge_m3u8.git"
   },
   "keywords": [
     "m3u8"
