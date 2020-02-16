@@ -1,5 +1,4 @@
 const fs = require('fs');
-const chalk = require('chalk');
 
 const { deleteFolderRecursive, Log } = require('./utils');
 
@@ -104,7 +103,7 @@ tempM3u8Files.forEach(value => {
   const outputFilePath = `${outputPath}/${value.slice(0, value.length - 5)}.${outputFileType}`;
 
   try {
-    execSync(`ffmpeg -allowed_extensions ALL -i ${value} ${outputFilePath}`);
+    execSync(`ffmpeg -allowed_extensions ALL -i ${value} ${outputFilePath} -loglevel warning`);
     Log.blueBright('文件转换完成：', value);
   } catch (e) {
     Log.redBright('文件转换出现了错误：', `${value}：${JSON.stringify(e)}`);
