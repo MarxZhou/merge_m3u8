@@ -5,7 +5,8 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  extends: ['plugin:jest/recommended', 'eslint:recommended', 'plugin:prettier/recommended'],
+  plugins: ['module-resolver'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -13,5 +14,12 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
-  rules: {},
+  rules: {
+    'module-resolver/use-alias': 2,
+  },
+  settings: {
+    'import/resolver': {
+      'babel-module': {},
+    },
+  },
 };

@@ -1,11 +1,12 @@
 {
   "name": "merge_m3u8",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Script to batch convert m3u8 files to mp4 videos",
   "main": "src/index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,14 +18,35 @@
   "author": "MarxZhou",
   "license": "MIT",
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
     "chalk": "^3.0.0",
     "chance": "^1.1.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-arrow-functions": "^7.8.3",
+    "@babel/plugin-transform-typescript": "^7.9.4",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/node": "^13.9.3",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^25.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
+    "eslint-import-resolver-babel-module": "^5.1.2",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-module-resolver": "^0.16.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
+    "jest": "^25.1.0",
+    "jest-extended": "^0.11.5",
+    "prettier": "^1.19.1",
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.2.0",
+    "typescript": "^3.8.3"
   },
   "engines": {
     "node": ">=10.0.0"
