@@ -3,7 +3,7 @@ import chalk, { ForegroundColor } from 'chalk';
 
 export const deleteFolderRecursive: (path: string) => void = path => {
   if (!fs.existsSync(path)) {
-    fs.readdirSync(path).forEach(file => {
+    fs.readdirSync(path).forEach((file: string) => {
       const curPath: string = path + '/' + file;
       if (fs.statSync(curPath).isDirectory()) {
         // recurse
@@ -23,7 +23,7 @@ export interface LogConfig {
   redBright: (key: string, value: string) => void;
 }
 
-export const Log = (): LogConfig => {
+const Log = (): LogConfig => {
   const { log } = console;
 
   const print: (color: typeof ForegroundColor, key: string, value: string) => void = (color, key, value) => {

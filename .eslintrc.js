@@ -6,7 +6,6 @@ module.exports = {
     node: true,
   },
   extends: ['plugin:jest/recommended', 'eslint:recommended', 'plugin:prettier/recommended'],
-  plugins: ['module-resolver'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -14,12 +13,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
-  rules: {
-    'module-resolver/use-alias': 2,
-  },
+  rules: {},
   settings: {
     'import/resolver': {
-      'babel-module': {},
+      alias: [
+        ['~', './'],
+        ['@', './src'],
+      ],
     },
   },
 };
