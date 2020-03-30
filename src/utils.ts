@@ -1,7 +1,7 @@
-import fs from 'fs';
-import chalk, { ForegroundColor } from 'chalk';
+const fs = require('fs');
+const chalk = require('chalk');
 
-export const deleteFolderRecursive: (path: string) => void = path => {
+const deleteFolderRecursive: (path: string) => void = path => {
   if (!fs.existsSync(path)) {
     fs.readdirSync(path).forEach((file: string) => {
       const curPath: string = path + '/' + file;
@@ -17,7 +17,7 @@ export const deleteFolderRecursive: (path: string) => void = path => {
   }
 };
 
-export interface LogConfig {
+interface LogConfig {
   blueBright: (key: string, value: string) => void;
   greenBright: (key: string, value: string) => void;
   redBright: (key: string, value: string) => void;
@@ -26,7 +26,7 @@ export interface LogConfig {
 const Log = (): LogConfig => {
   const { log } = console;
 
-  const print: (color: typeof ForegroundColor, key: string, value: string) => void = (color, key, value) => {
+  const print: (color: string, key: string, value: string) => void = (color, key, value) => {
     log(`${chalk[color](key)}${value}`);
   };
 
@@ -43,7 +43,9 @@ const Log = (): LogConfig => {
   };
 };
 
-export default {
+module.exports = {
   deleteFolderRecursive,
   Log: Log(),
 };
+
+export default {};
