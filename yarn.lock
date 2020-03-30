@@ -1625,6 +1625,11 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.npm.taobao.org/gensync/download/gensync-1.0.0-beta.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgensync%2Fdownload%2Fgensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha1-WPQ2H/mH5f9uHnohCCeqNx6qwmk=
 
+get-caller-file@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/get-caller-file/download/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
+  integrity sha1-+Xj6TJDR3+f/LWvtoqUV5xO9z0o=
+
 get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "https://registry.npm.taobao.org/get-caller-file/download/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
@@ -2766,6 +2771,14 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.5"
 
+mock-require@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npm.taobao.org/mock-require/download/mock-require-3.0.3.tgz#ccd544d9eae81dd576b3f219f69ec867318a1946"
+  integrity sha1-zNVE2eroHdV2s/IZ9p7IZzGKGUY=
+  dependencies:
+    get-caller-file "^1.0.2"
+    normalize-path "^2.1.1"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/ms/download/ms-2.0.0.tgz?cache=0&sync_timestamp=1575472461218&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fms%2Fdownload%2Fms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -3843,6 +3856,15 @@ typescript-transform-paths@^1.1.14:
   dependencies:
     slash "^3.0.0"
 
+typescript-tslint-plugin@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.npm.taobao.org/typescript-tslint-plugin/download/typescript-tslint-plugin-0.5.5.tgz#673875c43640251f1ab3d63745d7d49726ff961c"
+  integrity sha1-Zzh1xDZAJR8as9Y3RdfUlyb/lhw=
+  dependencies:
+    minimatch "^3.0.4"
+    mock-require "^3.0.3"
+    vscode-languageserver "^5.2.1"
+
 typescript@^3.8.3:
   version "3.8.3"
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.8.3.tgz?cache=0&sync_timestamp=1585580721237&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
@@ -3910,6 +3932,37 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vscode-jsonrpc@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-4.0.0.tgz?cache=0&sync_timestamp=1584963107704&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvscode-jsonrpc%2Fdownload%2Fvscode-jsonrpc-4.0.0.tgz#a7bf74ef3254d0a0c272fab15c82128e378b3be9"
+  integrity sha1-p7907zJU0KDCcvqxXIISjjeLO+k=
+
+vscode-languageserver-protocol@3.14.1:
+  version "3.14.1"
+  resolved "https://registry.npm.taobao.org/vscode-languageserver-protocol/download/vscode-languageserver-protocol-3.14.1.tgz?cache=0&sync_timestamp=1584963103681&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvscode-languageserver-protocol%2Fdownload%2Fvscode-languageserver-protocol-3.14.1.tgz#b8aab6afae2849c84a8983d39a1cf742417afe2f"
+  integrity sha1-uKq2r64oSchKiYPTmhz3QkF6/i8=
+  dependencies:
+    vscode-jsonrpc "^4.0.0"
+    vscode-languageserver-types "3.14.0"
+
+vscode-languageserver-types@3.14.0:
+  version "3.14.0"
+  resolved "https://registry.npm.taobao.org/vscode-languageserver-types/download/vscode-languageserver-types-3.14.0.tgz#d3b5952246d30e5241592b6dde8280e03942e743"
+  integrity sha1-07WVIkbTDlJBWStt3oKA4DlC50M=
+
+vscode-languageserver@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.npm.taobao.org/vscode-languageserver/download/vscode-languageserver-5.2.1.tgz?cache=0&sync_timestamp=1584963109092&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvscode-languageserver%2Fdownload%2Fvscode-languageserver-5.2.1.tgz#0d2feddd33f92aadf5da32450df498d52f6f14eb"
+  integrity sha1-DS/t3TP5Kq312jJFDfSY1S9vFOs=
+  dependencies:
+    vscode-languageserver-protocol "3.14.1"
+    vscode-uri "^1.0.6"
+
+vscode-uri@^1.0.6:
+  version "1.0.8"
+  resolved "https://registry.npm.taobao.org/vscode-uri/download/vscode-uri-1.0.8.tgz#9769aaececae4026fb6e22359cb38946580ded59"
+  integrity sha1-l2mq7OyuQCb7biI1nLOJRlgN7Vk=
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"

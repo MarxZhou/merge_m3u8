@@ -14,6 +14,8 @@
 // import pathConfig from '@/config';
 // console.log('config:', pathConfig);
 
+const a = 1;
+
 console.log('1:', 1);
 
 import config, { OutputFileType } from '@/config';
