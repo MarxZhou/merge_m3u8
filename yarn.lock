@@ -163,14 +163,6 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/polyfill@^7.8.7":
-  version "7.8.7"
-  resolved "https://registry.npm.taobao.org/@babel/polyfill/download/@babel/polyfill-7.8.7.tgz#151ec24c7135481336168c3bd8b8bf0cf91c032f"
-  integrity sha1-FR7CTHE1SBM2Fow72Li/DPkcAy8=
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.4"
-
 "@babel/template@^7.7.4", "@babel/template@^7.8.3", "@babel/template@^7.8.6":
   version "7.8.6"
   resolved "https://registry.npm.taobao.org/@babel/template/download/@babel/template-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
@@ -906,11 +898,6 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chance@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.npm.taobao.org/chance/download/chance-1.1.4.tgz#d8743bf8e40bb05e024c305ca1ff441195eb23db"
-  integrity sha1-2HQ7+OQLsF4CTDBcof9EEZXrI9s=
-
 chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.npm.taobao.org/chardet/download/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
@@ -1027,11 +1014,6 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.npm.taobao.org/copy-descriptor/download/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
-
-core-js@^2.6.5:
-  version "2.6.11"
-  resolved "https://registry.npm.taobao.org/core-js/download/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
-  integrity sha1-OIMUafmSK97Y7iHJ3EaYXgOZMIw=
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -3132,11 +3114,6 @@ realpath-native@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/realpath-native/download/realpath-native-2.0.0.tgz?cache=0&sync_timestamp=1579721691172&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frealpath-native%2Fdownload%2Frealpath-native-2.0.0.tgz#7377ac429b6e1fd599dc38d08ed942d0d7beb866"
   integrity sha1-c3esQptuH9WZ3DjQjtlC0Ne+uGY=
-
-regenerator-runtime@^0.13.4:
-  version "0.13.5"
-  resolved "https://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.13.5.tgz?cache=0&sync_timestamp=1584052392667&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fregenerator-runtime%2Fdownload%2Fregenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
-  integrity sha1-2Hih0JS0MG0QuQlkhLM+vVXiZpc=
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"

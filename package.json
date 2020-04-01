@@ -20,9 +20,7 @@
   "author": "MarxZhou",
   "license": "MIT",
   "dependencies": {
-    "@babel/polyfill": "^7.8.7",
     "chalk": "^3.0.0",
-    "chance": "^1.1.4",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
     "typescript-transform-paths": "^1.1.14"

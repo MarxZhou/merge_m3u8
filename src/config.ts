@@ -4,20 +4,16 @@ export enum OutputFileType {
   mkv = 'mkv',
 }
 
-export interface PathConfig {
-  inputPath: string;
-  outputPath: string;
-  tempPath: string;
-  saveM3u8File: boolean;
-  outputFileType: OutputFileType;
-}
+export const inputPath: string = 'D:/study_data/rawData';
+export const outputPath: string = 'D:/study_data/mp4Data';
+export const tempPath: string = 'D:/study_data/Temp';
+export const saveM3u8File: boolean = false;
+export const outputFileType: OutputFileType = OutputFileType.mp4;
 
-export const pathConfig: PathConfig = {
-  inputPath: 'D:/study_data/rawData',
-  outputPath: 'D:/study_data/mp4Data',
-  tempPath: 'D:/study_data/Temp',
-  saveM3u8File: false,
-  outputFileType: OutputFileType.mp4,
+export default {
+  inputPath,
+  outputPath,
+  tempPath,
+  saveM3u8File,
+  outputFileType,
 };
-
-export default pathConfig;
