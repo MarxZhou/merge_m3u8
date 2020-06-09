@@ -1,77 +1,31 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
 
-import { Log, deleteFolderRecursive } from '@/utils';
-import { inputPath, outputPath, tempPath, saveM3u8File, outputFileType } from '@/config';
+import { workDirectories, saveM3u8File, outputFileExtension } from '@/config';
 
-// 判断临时文件夹是否存在，如果不存在则进行创建
-const isTempDirExist: boolean = fs.existsSync(tempPath);
-if (!isTempDirExist) {
-  fs.mkdirSync(tempPath);
-  Log.greenBright('临时文件夹创建完成：', tempPath);
-}
+import { Log, deleteFolderRecursive } from '@/utils';
+import { pathReg } from '@/reg';
+
+import { checkDirectories } from '@/check';
+import { generateBackup } from '@/generateBackup';
+import { readM3u8Files } from '@/readFiles';
+import { fixSecretKey } from '@/fixSecretKey';
+import { fixVideoData } from '@/fixVideoData';
+
+// 备份m3u8文件
+generateBackup();
+
+// 校验工作目录
+checkDirectories();
 
 // 读取m3u8的索引文件
-const m3u8Files: string[] = fs.readdirSync(inputPath).filter(value => value.endsWith('.m3u8'));
+const m3u8Files = readM3u8Files();
 
-// 过滤文件名的正则表达式
-const fileNameReg: RegExp = /[^\u4e00-\u9fa5\w.-]/g;
+// 修复m3u8的密钥路径
+fixSecretKey();
 
-/**
- * 将文件复制到临时文件夹，并进行重新命名
- * 删除文件名中除汉字、英文字母和数字的字符
- */
-m3u8Files.forEach((value: string) => {
-  try {
-    const newFileName: string = value.replace(fileNameReg, '');
-
-    fs.copyFileSync(`${inputPath}/${value}`, `${tempPath}/${newFileName}`);
-  } catch (e) {
-    Log.redBright('临时文件生成出现了错误：', `${value}：${JSON.stringify(e)}`);
-  }
-});
-Log.greenBright('临时文件创建完成，文件名中的除中文、英文、数字、下划线、点和中横线外的字符都会被删除');
-
-// 读取重命名完成的临时文件
-const tempM3u8Files: string[] = fs.readdirSync(tempPath);
-
-// 切换进程工作目录到临时文件夹
-process.chdir(tempPath);
-
-const keyReg: RegExp = /URI="(.*)\/(\w*)\/(\w*)"/;
-
-/**
- * 如果视频文件被加密，则修正密钥的加载路径
- */
-tempM3u8Files.forEach((value: string) => {
-  try {
-    // 获取当前m3u8文件
-    const m3u8File: string = fs.readFileSync(`${tempPath}/${value}`, 'utf8');
-
-    // 判断是否加密
-    const isEncrypted: RegExpMatchArray | null = m3u8File.match(keyReg);
-
-    if (isEncrypted) {
-      // 如果加密，则处理密钥的路径
-      const keyUri: string = isEncrypted[1];
-
-      const newM3u8File: string = m3u8File.replace(keyUri, inputPath);
-
-      const tempFile: string = `${tempPath}/${value}`;
-
-      fs.writeFileSync(tempFile, newM3u8File);
-
-      Log.greenBright('文件密钥信息修正完成：', value);
-    } else {
-      // 如果加密，输出日志
-      Log.greenBright('文件未加密：', value);
-    }
-  } catch (e) {
-    Log.redBright('密钥路径修正过程出现了错误：', `${value}：${JSON.stringify(e)}`);
-  }
-});
-
-const pathReg: RegExp = /(\/.*\w)(\/\/?)(\w*)\/(\w*\s)/;
+// 修复m3u8文件的视频数据
+fixVideoData();
 
 /**
  * 进行视频数据路径修正
@@ -79,7 +33,7 @@ const pathReg: RegExp = /(\/.*\w)(\/\/?)(\w*)\/(\w*\s)/;
 tempM3u8Files.forEach((value: string) => {
   Log.blueBright('正在处理的m3u8文件：', value);
   try {
-    const m3u8File: string = fs.readFileSync(`${tempPath}/${value}`, 'utf8');
+    const m3u8File: string = fs.readFileSync(`${workDirectories.backupPath}/${value}`, 'utf8');
 
     const basePath: RegExpMatchArray | null = m3u8File.match(pathReg);
 
@@ -91,7 +45,7 @@ tempM3u8Files.forEach((value: string) => {
       const errSign: string | null = basePath[2] === '//' ? '//' : null;
 
       // 对路径进行修复
-      const temp: string = m3u8File.replace(new RegExp(path, 'g'), inputPath);
+      const temp: string = m3u8File.replace(new RegExp(path, 'g'), workDirectories.inputPath);
 
       // 最终视频索引数据
       let newM3u8File = temp;
@@ -102,7 +56,7 @@ tempM3u8Files.forEach((value: string) => {
       }
 
       // 临时文件的路径
-      const tempFilePath = `${tempPath}/${value}`;
+      const tempFilePath = `${workDirectories.backupPath}/${value}`;
 
       fs.writeFileSync(tempFilePath, newM3u8File);
       Log.greenBright('视频路径修正完成：', value);
@@ -116,7 +70,10 @@ tempM3u8Files.forEach((value: string) => {
 tempM3u8Files.forEach((value: string) => {
   Log.blueBright('正在转换中：', value);
 
-  const outputFilePath: string = `${outputPath}/${value.slice(0, value.length - 5)}.${outputFileType}`;
+  const outputFilePath: string = `${workDirectories.outputPath}/${value.slice(
+    0,
+    value.length - 5
+  )}.${outputFileExtension}`;
 
   try {
     execSync(`ffmpeg -allowed_extensions ALL -i ${value} ${outputFilePath} -loglevel warning`);
@@ -128,6 +85,6 @@ tempM3u8Files.forEach((value: string) => {
 
 // 判断是否需要删除临时文件夹
 if (!saveM3u8File) {
-  deleteFolderRecursive(tempPath);
+  deleteFolderRecursive(workDirectories.backupPath);
   Log.greenBright('临时文件夹删除完成');
 }

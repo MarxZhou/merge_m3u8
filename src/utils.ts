@@ -2,7 +2,7 @@ import fs from 'fs';
 import chalk, { ForegroundColor } from 'chalk';
 
 export const deleteFolderRecursive: (path: string) => void = path => {
-  if (!fs.existsSync(path)) {
+  if (fs.existsSync(path)) {
     fs.readdirSync(path).forEach((file: string) => {
       const curPath: string = path + '/' + file;
       if (fs.statSync(curPath).isDirectory()) {

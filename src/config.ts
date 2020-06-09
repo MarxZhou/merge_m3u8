@@ -1,19 +1,17 @@
-export enum OutputFileType {
-  mp4 = 'mp4',
-  avi = 'avi',
-  mkv = 'mkv',
-}
+import { OutputFileTypes } from './types';
 
-export const inputPath: string = 'D:/study_data/rawData';
-export const outputPath: string = 'D:/study_data/mp4Data';
-export const tempPath: string = 'D:/study_data/Temp';
-export const saveM3u8File: boolean = false;
-export const outputFileType: OutputFileType = OutputFileType.mp4;
+export const workDirectories = {
+  inputPath: 'D:/study_data/m3u8Resources/raw',
+  outputPath: 'E:/FFMpegOutput/videoData',
+  backupPath: 'E:/FFMpegOutput/backupM3u8Files',
+};
+
+export const saveM3u8File: boolean = true;
+
+export const outputFileExtension: OutputFileTypes = OutputFileTypes.mp4;
 
 export default {
-  inputPath,
-  outputPath,
-  tempPath,
+  workDirectories,
   saveM3u8File,
-  outputFileType,
+  outputFileExtension,
 };
