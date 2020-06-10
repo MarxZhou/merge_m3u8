@@ -21,8 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "@types/react": "^16.9.34",
+    "app-root-path": "^3.0.0",
     "chalk": "^3.0.0",
     "cross-env": "^7.0.2",
+    "dayjs": "^1.8.28",
     "ts-node": "7.*",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",
@@ -31,6 +33,7 @@
     "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
     "@types/node": "^13.9.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",

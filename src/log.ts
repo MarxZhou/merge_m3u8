@@ -1,77 +1,94 @@
-import winston from 'winston';
-import 'winston-daily-rotate-file';
+import { format, transports, createLogger } from 'winston';
+import AppRoot from 'app-root-path';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
 
-const infoTransport = new winston.transports.DailyRotateFile({
-  filename: 'application-info-%DATE%.log',
-  frequency: '10s',
-  dirname: '../logs',
-  datePattern: 'YYYY-MM-DD HH:MM:ss',
-  zippedArchive: true,
-  maxSize: '20m',
-  maxFiles: 6,
-  level: 'info',
+dayjs.locale('zh-cn');
+
+const combineTransport = new transports.File({
+  filename: `combine.log`,
+  // filename: `${dayjs().format('YYYY-MM-DD HH:mm:ss')}.info.log`,
+  dirname: `${AppRoot}/logs`,
+  maxsize: 5 * 1024 * 1024,
+  maxFiles: 2,
+  level: 'silly',
 });
 
-infoTransport.on('rotate', (oldFilename: string, newFilename: string) => {
-  // do something fun
-  logger.info('create new info log file', { level: `info`, oldFilename, newFilename });
-});
-
-const errorTransport = new winston.transports.DailyRotateFile({
-  filename: 'application-error-%DATE%.log',
-  frequency: '10s',
-  dirname: '../logs',
-  datePattern: 'YYYY-MM-DD HH:MM:ss',
-  zippedArchive: true,
-  maxSize: '20m',
-  maxFiles: 6,
+const errorTransport = new transports.File({
+  filename: `error.log`,
+  // filename: `${dayjs().format('YYYY-MM-DD HH:mm:ss')}.error.log`,
+  dirname: `${AppRoot}/logs`,
+  maxsize: 5 * 1024 * 1024,
+  maxFiles: 2,
   level: 'error',
 });
 
-errorTransport.on('rotate', (oldFilename: string, newFilename: string) => {
-  // do something fun
-  logger.info('create new error log file', { level: `error`, oldFilename, newFilename });
-});
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
+const logger = createLogger({
+  level: 'silly',
+  format: format.combine(
+    format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
+    format.json()
+  ),
   defaultMeta: { service: 'client' },
-  transports: [
-    // - Write all logs with level `info` and below to `application-info-%DATE%.log`
-    infoTransport,
-
-    // - Write all logs with level `error` and below to `application-error-%DATE%.log`
-    errorTransport,
-  ],
+  transports: [combineTransport, errorTransport],
 });
 
-//
-// If we're not in production then log to the `console` with the format:
-// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-//
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
+    new transports.Console({
+      format: format.combine(
+        format.colorize(),
+        format.timestamp({
+          format: 'YYYY-MM-DD HH:mm:ss',
+        }),
+        format.align(),
+        format.splat(),
+        format.printf(info => {
+          return `${info.timestamp} ${info.level}: [${info.label}] ${info.message}`;
+        })
+      ),
+      level: 'silly',
     })
   );
 }
 
-let i = 0;
-console.log(`i:`, i);
+for (let i = 0; i < 1; i += 1) {
+  logger.error(`This is an error log item ${i}`, {
+    service: 'test-error',
+    label: 'error-label',
+  });
 
-setInterval((): void => {
-  i += 1;
-  console.log(`i:`, i);
+  logger.warn(`This is an warn log item ${i}`, {
+    service: 'test-warn',
+    label: 'warn-label',
+  });
 
   logger.info(`This is an info log item ${i}`, {
-    service: 'test',
+    service: 'test-info',
+    label: 'info-label',
   });
 
-  logger.error(`This is an error log item ${i}`, {
-    service: 'test',
+  logger.http(`This is an http log item ${i}`, {
+    service: 'test-http',
+    label: 'http-label',
   });
-}, 1000);
+
+  logger.verbose(`This is an verbose log item ${i}`, {
+    service: 'test-verbose',
+    label: 'verbose-label',
+  });
+
+  logger.debug(`This is an debug log item ${i}`, {
+    service: 'test-debug',
+    label: 'debug-label',
+  });
+
+  logger.silly(`This is an silly log item ${i}`, {
+    service: 'test-silly',
+    label: 'silly-label',
+  });
+}
 
 export default logger;
