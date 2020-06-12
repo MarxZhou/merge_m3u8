@@ -5,8 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
-    "dev": "cross-env dev=true nodemon -r tsconfig-paths/register ./src/index.ts",
-    "test": "jest"
+    "dev": "cross-env dev=true nodemon -r tsconfig-paths/register ./src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -20,11 +19,8 @@
   "author": "MarxZhou",
   "license": "MIT",
   "dependencies": {
-    "@types/react": "^16.9.34",
     "app-root-path": "^3.0.0",
-    "chalk": "^3.0.0",
     "cross-env": "^7.0.2",
-    "dayjs": "^1.8.28",
     "ts-node": "7.*",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3",

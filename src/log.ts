@@ -1,25 +1,34 @@
 import { format, transports, createLogger } from 'winston';
+import 'winston-daily-rotate-file';
 import AppRoot from 'app-root-path';
-import dayjs from 'dayjs';
-import 'dayjs/locale/zh-cn';
 
-dayjs.locale('zh-cn');
-
-const combineTransport = new transports.File({
-  filename: `combine.log`,
-  // filename: `${dayjs().format('YYYY-MM-DD HH:mm:ss')}.info.log`,
+const combineTransport = new transports.DailyRotateFile({
+  filename: 'combine-%DATE%.log',
+  datePattern: 'YYYY-MM-DD',
+  zippedArchive: true,
   dirname: `${AppRoot}/logs`,
-  maxsize: 5 * 1024 * 1024,
-  maxFiles: 2,
+  maxSize: '20m',
+  maxFiles: '14d',
   level: 'silly',
 });
 
-const errorTransport = new transports.File({
-  filename: `error.log`,
-  // filename: `${dayjs().format('YYYY-MM-DD HH:mm:ss')}.error.log`,
+const errorTransport = new transports.DailyRotateFile({
+  filename: `error-%DATE%.log`,
+  datePattern: 'YYYY-MM-DD',
+  zippedArchive: true,
   dirname: `${AppRoot}/logs`,
-  maxsize: 5 * 1024 * 1024,
-  maxFiles: 2,
+  maxSize: '20m',
+  maxFiles: '14d',
+  level: 'error',
+});
+
+const exceptionTransport = new transports.DailyRotateFile({
+  filename: `exception-%DATE%.log`,
+  datePattern: 'YYYY-MM-DD',
+  zippedArchive: true,
+  dirname: `${AppRoot}/logs`,
+  maxSize: '20m',
+  maxFiles: '14d',
   level: 'error',
 });
 
@@ -33,6 +42,7 @@ const logger = createLogger({
   ),
   defaultMeta: { service: 'client' },
   transports: [combineTransport, errorTransport],
+  exceptionHandlers: [exceptionTransport],
 });
 
 if (process.env.NODE_ENV !== 'production') {
@@ -54,7 +64,13 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
-for (let i = 0; i < 1; i += 1) {
+/*
+ * 下面的代码为测试代码
+ * */
+/*
+let i = 0;
+
+const logActions = (): void => {
   logger.error(`This is an error log item ${i}`, {
     service: 'test-error',
     label: 'error-label',
@@ -89,6 +105,12 @@ for (let i = 0; i < 1; i += 1) {
     service: 'test-silly',
     label: 'silly-label',
   });
-}
+};
+
+setInterval((): void => {
+  i += 1;
+  logActions();
+}, 1000);
+*/
 
 export default logger;
