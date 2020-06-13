@@ -1,16 +1,24 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
 
+import LoggerTool from '@/logger';
+
 import { workDirectories, saveM3u8File, outputFileExtension } from '@/config';
 
-import { Log, deleteFolderRecursive } from '@/utils';
-import { pathReg } from '@/reg';
+import { deleteFolderRecursive } from '@/utils';
+import { pathReg } from '@/utils/reg';
 
-import { checkDirectories } from '@/check';
-import { generateBackup } from '@/generateBackup';
-import { readM3u8Files } from '@/readFiles';
-import { fixSecretKey } from '@/fixSecretKey';
-import { fixVideoData } from '@/fixVideoData';
+import { checkDirectories } from '@/actions/check';
+import { generateBackup } from '@/actions/generateBackup';
+import { readM3u8Files } from '@/actions/readFiles';
+import { fixSecretKey } from '@/actions/fixSecretKey';
+import { fixVideoData } from '@/actions/fixVideoData';
+
+const label = 'index';
+
+const logs = new LoggerTool();
+
+logs.setLabel(label);
 
 // 备份m3u8文件
 generateBackup();

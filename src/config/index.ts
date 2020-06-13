@@ -1,4 +1,4 @@
-import { OutputFileTypes } from './types';
+import { OutputFileTypes } from '@/config/types';
 
 export const workDirectories = {
   inputPath: 'D:/study_data/m3u8Resources/raw',

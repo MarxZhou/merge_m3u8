@@ -1,8 +1,9 @@
 import fs from 'fs';
 
-import { Log } from '@/utils';
+import logger from '@/logs/log';
+
 import { workDirectories } from '@/config';
-import { readM3u8Files } from '@/readFiles';
+import { readM3u8Files } from '@/actions/readFiles';
 
 /**
  * 将m3u8文件进行备份。
@@ -10,6 +11,7 @@ import { readM3u8Files } from '@/readFiles';
 export const generateBackup = (): void => {
   const m3u8Files = readM3u8Files();
 
+  logger.verbose();
   Log.greenBright('备份文件开始创建');
   m3u8Files.forEach((value: string) => {
     try {

@@ -1,7 +1,7 @@
 import lineReader from 'readline';
 
-import { readTempFile } from '@/readFiles';
-import { pathReg } from '@/reg';
+import { readTempFile } from '@/actions/readFiles';
+import { pathReg } from '@/utils/reg';
 
 export const fixVideoData = (): void => {
   const tempM3u8Files = readTempFile();

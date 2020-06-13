@@ -1,10 +1,10 @@
 import fs from 'fs';
 
 import { workDirectories } from '@/config';
-import { keyReg } from '@/reg';
+import { keyReg } from '@/utils/reg';
 import { Log } from '@/utils';
 
-import { readTempFile } from '@/readFiles';
+import { readTempFile } from '@/actions/readFiles';
 
 /**
  * 如果视频文件被加密，则修正密钥的加载路径
