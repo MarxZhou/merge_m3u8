@@ -1,18 +1,29 @@
 import fs from 'fs';
 
 import { workDirectories } from '@/config';
-import { Log } from '@/utils';
+import LoggerTool from '@/logger';
 
-export const checkDirectories = (): void =>
+const label = 'check dictionaries';
+
+const logger = new LoggerTool();
+
+logger.setLabel(label);
+
+export const checkDirectories = (): void => {
+  logger.info('开始检查工作目录');
   Object.entries(workDirectories).forEach(([key, value]) => {
     if (!fs.existsSync(value)) {
       if (workDirectories.inputPath === value) {
-        Log.redBright(`m3u8文件目录不存在，请重新配置`);
+        logger.error('m3u8文件资源目录不存在，请重新配置');
         throw new Error('m3u8文件目录不存在，请重新配置');
       }
       fs.mkdirSync(value);
-      Log.greenBright(`工作目录${key}创建完成：`, value);
+      logger.info(`目录创建完成：${key}——${value}`);
     } else {
-      Log.greenBright(`工作目录${key}已存在：`, value);
+      logger.info(`目录已经存在：${key}——${value}`);
     }
   });
+  logger.info('工作目录检查完成');
+};
+
+export default checkDirectories;

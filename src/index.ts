@@ -1,43 +1,38 @@
-import fs from 'fs';
-import { execSync } from 'child_process';
-
 import LoggerTool from '@/logger';
 
-import { workDirectories, saveM3u8File, outputFileExtension } from '@/config';
+import { workDirectories, saveBackupM3u8File } from '@/config';
 
 import { deleteFolderRecursive } from '@/utils';
-import { pathReg } from '@/utils/reg';
 
-import { checkDirectories } from '@/actions/check';
-import { generateBackup } from '@/actions/generateBackup';
-import { readM3u8Files } from '@/actions/readFiles';
-import { fixSecretKey } from '@/actions/fixSecretKey';
-import { fixVideoData } from '@/actions/fixVideoData';
+import checkDirectories from '@/actions/check';
+import generateBackup from '@/actions/generateBackup';
+import renameFilesName from '@/actions/renameFilesName';
+import fix from '@/actions/fix';
 
 const label = 'index';
 
-const logs = new LoggerTool();
+const logger = new LoggerTool();
 
-logs.setLabel(label);
+logger.setLabel(label);
 
-// 备份m3u8文件
-generateBackup();
+logger.verbose('日志系统启动成功');
 
 // 校验工作目录
 checkDirectories();
 
-// 读取m3u8的索引文件
-const m3u8Files = readM3u8Files();
+// 备份m3u8文件
+generateBackup();
 
-// 修复m3u8的密钥路径
-fixSecretKey();
+// 重命名m3u8文件
+renameFilesName();
 
-// 修复m3u8文件的视频数据
-fixVideoData();
+// 修复m3u8文件的数据
+fix();
 
 /**
  * 进行视频数据路径修正
  */
+/*
 tempM3u8Files.forEach((value: string) => {
   Log.blueBright('正在处理的m3u8文件：', value);
   try {
@@ -73,8 +68,10 @@ tempM3u8Files.forEach((value: string) => {
     Log.redBright('视频路径修正过程出现了错误：', `${value}：${JSON.stringify(e)}`);
   }
 });
+*/
 
 // 对视频进行格式转换
+/*
 tempM3u8Files.forEach((value: string) => {
   Log.blueBright('正在转换中：', value);
 
@@ -90,9 +87,10 @@ tempM3u8Files.forEach((value: string) => {
     Log.redBright('格式转换过程中出现了错误：', `${value}：${JSON.stringify(e)}`);
   }
 });
+*/
 
-// 判断是否需要删除临时文件夹
-if (!saveM3u8File) {
+// 判断保存备份的m3u8文件
+if (!saveBackupM3u8File) {
   deleteFolderRecursive(workDirectories.backupPath);
-  Log.greenBright('临时文件夹删除完成');
+  logger.info('备份文件删除完成');
 }

@@ -1,29 +1,34 @@
 import fs from 'fs';
 
-import logger from '@/logs/log';
+import LoggerTool from '@/logger';
 
 import { workDirectories } from '@/config';
 import { readM3u8Files } from '@/actions/readFiles';
+
+const label = 'generate backup';
+
+const logger = new LoggerTool();
+
+logger.setLabel(label);
 
 /**
  * 将m3u8文件进行备份。
  */
 export const generateBackup = (): void => {
+  logger.info('开始进行meu8文件的备份');
+  logger.info(`资源目录：${workDirectories.inputPath}`);
+  logger.info(`备份目录：${workDirectories.backupPath}`);
   const m3u8Files = readM3u8Files();
 
-  logger.verbose();
-  Log.greenBright('备份文件开始创建');
   m3u8Files.forEach((value: string) => {
     try {
       fs.copyFileSync(`${workDirectories.inputPath}/${value}`, `${workDirectories.backupPath}/${value}`);
-
-      Log.greenBright(`临时文件已创建：${value}`);
     } catch (e) {
-      Log.redBright(`创建备份文件 ${value} 时出现了错误：`, `${JSON.stringify(e)}`);
+      logger.error(`m3u8文件：${value}备份失败，失败原因：${JSON.stringify(e)}`);
     }
   });
-  Log.greenBright('备份文件创建完成');
-  Log.greenBright('========================================');
+
+  logger.info('备份过程结束！！！');
 };
 
 export default generateBackup;

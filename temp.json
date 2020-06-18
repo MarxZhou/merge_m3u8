@@ -1,0 +1,42 @@
+{
+  "error": {
+    "errno": -4058,
+    "code": "ENOENT",
+    "syscall": "open",
+    "path": "D:\\study_data\\merge_m3u8\\big-file.txt"
+  },
+  "level": "error",
+  "message": "uncaughtException: ENOENT: no such file or directory, open 'D:\\study_data\\merge_m3u8\\big-file.txt'\nError: ENOENT: no such file or directory, open 'D:\\study_data\\merge_m3u8\\big-file.txt'",
+  "stack": "Error: ENOENT: no such file or directory, open 'D:\\study_data\\merge_m3u8\\big-file.txt'",
+  "exception": true,
+  "date": "Fri Jun 19 2020 02:36:08 GMT+0800 (GMT+08:00)",
+  "process": {
+    "pid": 14028,
+    "uid": null,
+    "gid": null,
+    "cwd": "D:\\study_data\\merge_m3u8",
+    "execPath": "F:\\Development\\Node\\nodejs\\node.exe",
+    "version": "v12.16.3",
+    "argv": [
+      "node",
+      "D:\\study_data\\merge_m3u8\\src\\index.ts"
+    ],
+    "memoryUsage": {
+      "rss": 119574528,
+      "heapTotal": 94044160,
+      "heapUsed": 76126240,
+      "external": 1644135
+    }
+  },
+  "os": {
+    "loadavg": [
+      0,
+      0,
+      0
+    ],
+    "uptime": 363235
+  },
+  "trace": [],
+  "label": "log",
+  "timestamp": "2020-06-19 02:36:08"
+}
