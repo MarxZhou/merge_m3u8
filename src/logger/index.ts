@@ -65,20 +65,28 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
+export interface Meta {
+  filename?: string;
+  error?: any;
+  backupPath?: string;
+  inputPath?: string;
+  script?: string;
+}
+
 export interface LoggerToolLevels {
-  error(message: string, meta: object): void;
+  error(message: string, meta?: Meta): void;
 
-  warn(message: string, meta: object): void;
+  warn(message: string, meta?: Meta): void;
 
-  info(message: string, meta: object): void;
+  info(message: string, meta?: Meta): void;
 
-  http(message: string, meta: object): void;
+  http(message: string, meta?: Meta): void;
 
-  verbose(message: string, meta: object): void;
+  verbose(message: string, meta?: Meta): void;
 
-  debug(message: string, meta: object): void;
+  debug(message: string, meta?: Meta): void;
 
-  silly(message: string, meta: object): void;
+  silly(message: string, meta?: Meta): void;
 }
 
 export interface LoggerToolType extends LoggerToolLevels {
@@ -98,49 +106,49 @@ class LoggerTool implements LoggerToolType {
     this.label = label;
   }
 
-  error(message: string, meta: object = {}): void {
+  error(message: string, meta: Meta = {}): void {
     logger.error(message, {
       label: this.label,
       ...meta,
     });
   }
 
-  warn(message: string, meta: object = {}): void {
+  warn(message: string, meta: Meta = {}): void {
     logger.warn(message, {
       label: this.label,
       ...meta,
     });
   }
 
-  info(message: string, meta: object = {}): void {
+  info(message: string, meta: Meta = {}): void {
     logger.info(message, {
       label: this.label,
       ...meta,
     });
   }
 
-  http(message: string, meta: object = {}): void {
+  http(message: string, meta: Meta = {}): void {
     logger.http(message, {
       label: this.label,
       ...meta,
     });
   }
 
-  verbose(message: string, meta: object = {}): void {
+  verbose(message: string, meta: Meta = {}): void {
     logger.verbose(message, {
       label: this.label,
       ...meta,
     });
   }
 
-  debug(message: string, meta: object = {}): void {
+  debug(message: string, meta: Meta = {}): void {
     logger.debug(message, {
       label: this.label,
       ...meta,
     });
   }
 
-  silly(message: string, meta: object = {}): void {
+  silly(message: string, meta: Meta = {}): void {
     logger.silly(message, {
       label: this.label,
       ...meta,

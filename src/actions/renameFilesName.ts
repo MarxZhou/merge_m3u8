@@ -12,19 +12,20 @@ logger.setLabel(label);
 
 const dev = !!process.env.dev;
 
-const m3u8files = readM3u8Files();
-
 export const renameFilesName = (): void => {
-  logger.warn('m3u8文件名中的非中英文字符将会被删除');
+  logger.verbose('开始重命名m3u8文件');
+  logger.warn('m3u8文件名中的只会保留英文字符、数字、下划线，其他字符将会被删除');
 
-  m3u8files.forEach((value, index): void => {
+  const m3u8files = readM3u8Files();
+
+  m3u8files.forEach((filename, index): void => {
     if (dev && index >= 1) {
       return;
     }
-    rename(value);
+    rename(filename);
   });
 
-  logger.info('全部m3u8文件重命名完成！！！');
+  logger.verbose('全部m3u8文件重命名完成！！！');
 };
 
 export default renameFilesName;

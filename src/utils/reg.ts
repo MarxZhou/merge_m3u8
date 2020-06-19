@@ -1,11 +1,8 @@
-export const fileNameReg = /[^\u4e00-\u9fa5\w.-]/g;
+export const fileNameReg = /[^\w.]/gi;
 
-export const keyReg = /URI="(.*)\/(\w*)\/(\w*)"/;
-
-export const pathReg = /(\/.*\w)(\/\/?)(\w*)\/(\w*\s)/;
+export const pathReg = /([A-Za-z:])*\/.*\/(.*)(\/\w*)/gi;
 
 export default {
   fileNameReg,
-  keyReg,
   pathReg,
 };

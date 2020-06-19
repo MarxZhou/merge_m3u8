@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
-    "dev": "cross-env dev=true nodemon -r tsconfig-paths/register ./src/index.ts"
+    "dev": "cross-env dev=true nodemon -r tsconfig-paths/register ./src/index.ts",
+    "dev:ts": "cross-env dev=true ts-node -r tsconfig-paths/register ./src/index.ts"
   },
   "repository": {
     "type": "git",

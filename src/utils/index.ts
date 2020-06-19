@@ -16,7 +16,7 @@ logger.setLabel(label);
 const chance = new Chance();
 
 export const deleteFolderRecursive: (path: string) => void = currentPath => {
-  logger.info('准备删除备份目录和文件');
+  logger.verbose('准备删除备份目录和文件');
   if (fs.existsSync(currentPath)) {
     fs.readdirSync(currentPath).forEach((file: string) => {
       const curPath: string = currentPath + '/' + file;
@@ -29,24 +29,31 @@ export const deleteFolderRecursive: (path: string) => void = currentPath => {
       }
     });
     fs.rmdirSync(currentPath);
-    logger.info('备份目录和文件删除完成');
+    logger.verbose('备份目录和文件删除完成');
   }
-  logger.info('备份目录不存在');
+  logger.verbose('备份目录不存在');
 };
 
 export const rename = (filename: string): void => {
   try {
+    if (!fileNameReg.test(filename)) {
+      return;
+    }
+
     const newFilename = filename.replace(fileNameReg, '');
 
     let finalFilename = newFilename;
 
     if (fs.existsSync(path.join(workDirectories.inputPath, newFilename))) {
-      finalFilename = chance.hash();
+      finalFilename = `${chance.hash()}.m3u8`;
     }
 
     fs.renameSync(path.join(workDirectories.inputPath, filename), path.join(workDirectories.inputPath, finalFilename));
-  } catch (e) {
-    logger.error(`m3u8文件：${filename}重命名失败，原因：${JSON.stringify(e)}`);
+  } catch (error) {
+    logger.error(`m3u8文件：${filename} 重命名失败，原因：${error}`, {
+      filename,
+      error,
+    });
   }
 };
 

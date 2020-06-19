@@ -1,10 +1,8 @@
-import readline from 'readline';
 import fs from 'fs';
 import path from 'path';
-import events from 'events';
 
-import { workDirectories } from '@/config';
-// import { keyReg } from '@/utils/reg';
+import { workDirectories, needRelativeBackupM3u8File } from '@/config';
+import { pathReg } from '@/utils/reg';
 import { readM3u8Files } from '@/actions/readFiles';
 
 import LoggerTool from '@/logger';
@@ -17,38 +15,44 @@ logger.setLabel(label);
 
 const dev = !!process.env.dev;
 
-const processLineByLine = async (filename: string) => {
-  try {
-    const rl = readline.createInterface({
-      input: fs.createReadStream(path.join(workDirectories.inputPath, filename)),
-      crlfDelay: Infinity,
-    });
-
-    rl.on('line', (/*input*/) => {
-      // console.log(`input:`, input);
-    });
-
-    await events.once(rl, 'close');
-
-    logger.info(`m3u8文件：${filename}修复完成`);
-  } catch (e) {
-    logger.info(`修复文件${filename}失败，失败原因：${JSON.stringify(e)}`);
-  }
-};
-
 export const fix = (): void => {
+  logger.verbose(`文件修复过程开始`);
   const m3u8files = readM3u8Files();
-  logger.info(`文件修复过程开始`);
 
-  m3u8files.forEach(async (value, index) => {
-    if (dev && index >= 1) {
-      return;
+  m3u8files.forEach((filename, index) => {
+    try {
+      if (dev && index >= 1) {
+        return;
+      }
+
+      const file = path.join(workDirectories.inputPath, filename);
+
+      const data = fs.readFileSync(file, 'utf8');
+
+      const fixedData = data.replace(pathReg, `${workDirectories.inputPath}/$2$3`);
+
+      fs.writeFileSync(path.join(workDirectories.inputPath, filename), fixedData);
+
+      if (needRelativeBackupM3u8File) {
+        const fixedRelativeData = data.replace(pathReg, `./$2$3`);
+
+        fs.writeFileSync(path.join(workDirectories.relativeBackupPath, filename), fixedRelativeData);
+      }
+
+      if (dev) {
+        logger.info(`m3u8文件：${filename} 修复完成`, {
+          filename,
+        });
+      }
+    } catch (error) {
+      logger.error(`m3u8文件：${filename} 修复失败，失败原因：${error}`, {
+        filename,
+        error,
+      });
     }
-
-    await processLineByLine(value);
   });
 
-  logger.info(`全部m3u8文件修复完成`);
+  logger.verbose(`全部m3u8文件修复完成！！！`);
 };
 
 export default fix;
