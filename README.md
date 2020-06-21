@@ -16,23 +16,37 @@
 
 ## 使用方法
 
-1. 首先，您应该将 UC 浏览器缓存的 m3u8 文件正确地在电脑硬盘中进行存储
-2. 在配置文件 `./config/index.js` 中填入正确的信息
-3. 然后通过 node 启动当前程序包
+首先，您应该将 UC 浏览器缓存的 m3u8 文件正确地在电脑硬盘中进行存储
 
-### 启动方法
+- 在配置文件 `./config/index.js` 中填入正确的信息，然后通过 node 启动当前程序包
+- 通过命令行启动，并传递正确的参数信息
+
+## 命令行启动方法
 
 可以通过内置脚本启动
 
 ```shell
-npm start
+npm start -配置项 参数值
 ```
 
 也可以通过 node 直接启动入口文件
 
 ```shell
-ts-node ./src/index.ts
+ts-node ./src/index.ts -配置项 参数值
 ```
+
+## 配置参数
+
+| 属性：类型                                   | 默认值                                  | 说明                                                         |
+| -------------------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| inputPath: string                            | E:/m3u8Resources                        | m3u8文件的资源路径                                           |
+| outputPath: string                           | E:/FFMpegOutput/videoData               | 转换后的视频输出路径                                         |
+| backupPath: string                           | E:/FFMpegOutput/backupM3u8Files         | 原有的m3u8文件备份路径。资源路径中的m3u8文件会被修复为资源路径 |
+| relativeBackupPath: string                   | E:/FFMpegOutput/relativeBackupM3u8Files | 采用相对路径方案进行修正的备份m3u8文件保存路径               |
+| saveBackupM3u8File: boolean                  | true                                    | 转换成功后，是否需要保存备份的m3u8文件。包括原始备份路径和采用相对路径方案备份的m3u8文件 |
+| outputFileExtension: ‘mp4’ \| ‘mkv’ \| ‘aiv’ | mp4                                     | 转换后视频文件的扩展名                                       |
+| enableConvert: boolean                       | true                                    | 是否需要进行格式转换，测试使用                               |
+| needRelativeBackupM3u8File: boolean          | true                                    | 是否需要生成相对路径的备份m3u8文件                           |
 
 ## 特别注意
 
