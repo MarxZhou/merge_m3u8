@@ -54,6 +54,10 @@ export const fix = (): void => {
     }
   });
 
+  if (needRelativeBackupM3u8File) {
+    logger.verbose('采用相对路径方案的m3u8文件备份完成！！！');
+  }
+
   logger.verbose(`全部m3u8文件修复完成！！！`);
 };
 

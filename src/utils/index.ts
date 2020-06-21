@@ -59,7 +59,16 @@ export const rename = (filename: string): void => {
   }
 };
 
+export const processCmdParams = (): any => {
+  const p: any = {};
+  process.argv.slice(2).forEach((value, index, arr): void => {
+    p[value.slice(1)] = arr[index + 1];
+  });
+  return p;
+};
+
 export default {
   deleteFolderRecursive,
   rename,
+  processCmdParams,
 };
