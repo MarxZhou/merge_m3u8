@@ -1,6 +1,6 @@
 {
   "name": "merge_m3u8",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Script to batch convert m3u8 files to mp4 videos",
   "main": "./src/index.js",
   "scripts": {
