@@ -12,33 +12,19 @@ logs.setLabel('log-test');
 // console.log(`logger:`, logs);
 
 const logActions = (): void => {
-  logs.error(`This is an error log item ${i}`, {
-    label: 'error-label',
-  });
+  logs.error(`This is an error log item ${i}`, {});
 
-  logs.warn(`This is an warn log item ${i}`, {
-    label: 'warn-label',
-  });
+  logs.warn(`This is an warn log item ${i}`, {});
 
-  logs.info(`This is an info log item ${i}`, {
-    label: 'info-label',
-  });
+  logs.info(`This is an info log item ${i}`, {});
 
-  logs.http(`This is an http log item ${i}`, {
-    label: 'http-label',
-  });
+  logs.http(`This is an http log item ${i}`, {});
 
-  logs.verbose(`This is an verbose log item ${i}`, {
-    label: 'verbose-label',
-  });
+  logs.verbose(`This is an verbose log item ${i}`, {});
 
-  logs.debug(`This is an debug log item ${i}`, {
-    label: 'debug-label',
-  });
+  logs.debug(`This is an debug log item ${i}`, {});
 
-  logs.silly(`This is an silly log item ${i}`, {
-    label: 'silly-label',
-  });
+  logs.silly(`This is an silly log item ${i}`, {});
 };
 
 for (let j = 0; j < 1; j += 1) {

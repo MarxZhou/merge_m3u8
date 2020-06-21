@@ -1,6 +1,6 @@
 import LoggerTool from '@/logger';
 
-import { workDirectories, saveBackupM3u8File, needConvert } from '@/config';
+import { workDirectories, saveBackupM3u8File, enableConvert } from '@/config';
 
 import { deleteFolderRecursive } from '@/utils';
 
@@ -36,7 +36,7 @@ renameFilesName();
 fix();
 
 // 进行格式转换
-if (needConvert) {
+if (enableConvert) {
   convert();
 }
 
@@ -44,5 +44,3 @@ if (needConvert) {
 if (!saveBackupM3u8File) {
   deleteFolderRecursive(workDirectories.backupPath);
 }
-
-logger.verbose('恭喜你，工作完成！！！');

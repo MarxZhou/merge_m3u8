@@ -2,7 +2,7 @@ import { OutputFileTypes } from '@/config/types';
 
 export const workDirectories = {
   // m3u8资源路径
-  inputPath: 'D:/study_data/m3u8Resources/raw',
+  inputPath: 'E:/动漫m3u8',
   // 转换格式后的输出路径，该路径中不能存在同名文件，否则会因为无法覆盖而失败
   outputPath: 'E:/FFMpegOutput/videoData',
   // 采用绝对路径方案的备份文件的保存路径
@@ -19,8 +19,8 @@ export const saveBackupM3u8File = true;
 // 转换通用视频文件的扩展名
 export const outputFileExtension: OutputFileTypes = OutputFileTypes.mp4;
 
-// 是否需要进行格式转换
-export const needConvert = true;
+// 是否需要进行格式转换，测试使用
+export const enableConvert = true;
 
 // 是否需要生成相对路径的备份m3u8文件
 // 是否能够播放需要软件支持
@@ -31,5 +31,5 @@ export default {
   workDirectories,
   saveBackupM3u8File,
   outputFileExtension,
-  needConvert,
+  enableConvert,
 };

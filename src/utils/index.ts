@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+import omit from 'omit.js';
+
 import Chance from 'chance';
 
 import LoggerTool from '@/logger';
@@ -16,7 +18,7 @@ logger.setLabel(label);
 const chance = new Chance();
 
 export const deleteFolderRecursive: (path: string) => void = currentPath => {
-  logger.verbose('准备删除备份目录和文件');
+  logger.verbose(`准备删除目录：${path}`);
   if (fs.existsSync(currentPath)) {
     fs.readdirSync(currentPath).forEach((file: string) => {
       const curPath: string = currentPath + '/' + file;
@@ -29,9 +31,9 @@ export const deleteFolderRecursive: (path: string) => void = currentPath => {
       }
     });
     fs.rmdirSync(currentPath);
-    logger.verbose('备份目录和文件删除完成');
+    logger.verbose('目录删除完成');
   }
-  logger.verbose('备份目录不存在');
+  logger.verbose('目录不存在');
 };
 
 export const rename = (filename: string): void => {
@@ -52,7 +54,7 @@ export const rename = (filename: string): void => {
   } catch (error) {
     logger.error(`m3u8文件：${filename} 重命名失败，原因：${error}`, {
       filename,
-      error,
+      error: omit(error, ['output', 'stdout', 'stderr']),
     });
   }
 };

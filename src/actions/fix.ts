@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+import omit from 'omit.js';
+
 import { workDirectories, needRelativeBackupM3u8File } from '@/config';
 import { pathReg } from '@/utils/reg';
 import { readM3u8Files } from '@/actions/readFiles';
@@ -47,7 +49,7 @@ export const fix = (): void => {
     } catch (error) {
       logger.error(`m3u8文件：${filename} 修复失败，失败原因：${error}`, {
         filename,
-        error,
+        error: omit(error, ['output', 'stdout', 'stderr']),
       });
     }
   });

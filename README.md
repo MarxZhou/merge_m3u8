@@ -31,7 +31,7 @@ npm start
 也可以通过 node 直接启动入口文件
 
 ```shell
-node ./src/index.js
+ts-node ./src/index.ts
 ```
 
 ## 特别注意

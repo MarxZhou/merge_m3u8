@@ -71,6 +71,7 @@ export interface Meta {
   backupPath?: string;
   inputPath?: string;
   script?: string;
+  code?: number;
 }
 
 export interface LoggerToolLevels {

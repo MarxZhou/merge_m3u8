@@ -1,5 +1,7 @@
 import fs from 'fs';
 
+import omit from 'omit.js';
+
 import LoggerTool from '@/logger';
 
 import { workDirectories } from '@/config';
@@ -31,7 +33,7 @@ export const generateBackup = (): void => {
     } catch (error) {
       logger.error(`m3u8文件：${filename} 备份失败，失败原因：${error}`, {
         filename,
-        error,
+        error: omit(error, ['output', 'stdout', 'stderr']),
       });
     }
   });
