@@ -59,7 +59,7 @@ export const convert = (): void => {
         logger.info(`m3u8文件：${filename} 转换完成`);
 
         if (current === m3u8files.length) {
-          logger.info(`恭喜你，全部m3u8文件转换完成！！！`);
+          logger.verbose(chalk.greenBright('恭喜你，全部m3u8文件转换完成！！！'));
         }
       });
 
