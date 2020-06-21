@@ -12,7 +12,7 @@ logger.setLabel(label);
 
 export const checkDirectories = (): void => {
   logger.verbose('开始检查工作目录');
-  logger.warn(chalk.redBright('备份和输出目录要求为空文件夹'));
+  logger.warn(chalk.yellowBright('备份和输出目录要求为空文件夹'));
   Object.entries(workDirectories).forEach(([key, value]) => {
     if (!fs.existsSync(value)) {
       if (workDirectories.inputPath === value) {

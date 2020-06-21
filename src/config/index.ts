@@ -2,7 +2,7 @@ import { OutputFileTypes } from '@/config/types';
 
 export const workDirectories = {
   // m3u8资源路径
-  inputPath: 'E:/动漫m3u8',
+  inputPath: 'E:/test',
   // 转换格式后的输出路径，该路径中不能存在同名文件，否则会因为无法覆盖而失败
   outputPath: 'E:/FFMpegOutput/videoData',
   // 原始m3u8文件的备份路径

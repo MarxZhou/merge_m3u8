@@ -51,29 +51,27 @@ export const convert = (): void => {
         maxBuffer: Math.pow(1024, 10),
       });
 
-      cp.on('exit', (): void => {
+      cp.on('exit', (code): void => {
         current += 1;
 
-        logger.info(`${chalk.blueBright('当前任务进度')}：${chalk.greenBright(`${current}/${m3u8files.length}`)}`);
+        if (!code) {
+          logger.info(`${chalk.blueBright('当前任务进度')}：${chalk.greenBright(`${current}/${m3u8files.length}`)}`);
 
-        logger.info(`m3u8文件：${filename} 转换完成`);
+          logger.info(`m3u8文件：${filename} 转换完成`);
 
-        if (current === m3u8files.length) {
-          logger.verbose(chalk.greenBright('恭喜你，全部m3u8文件转换完成！！！'));
-        }
-      });
-
-      cp.on('error', (error): void => {
-        logger.error(
-          `m3u8文件：${filename} 转换失败，${chalk.redBright(
-            '请手动检查m3u8文件对应的资源目录是否存在！'
-          )}失败原因：${error}`,
-          {
-            filename,
-            error,
-            script: tempScript,
+          if (current === m3u8files.length) {
+            logger.verbose(chalk.greenBright('恭喜你，全部m3u8文件转换完成！！！'));
           }
-        );
+        } else {
+          logger.error(
+            `m3u8文件：${filename} 转换失败，${chalk.redBright('请手动检查m3u8文件对应的资源目录是否存在！')}`,
+            {
+              filename,
+              code,
+              script: tempScript,
+            }
+          );
+        }
       });
     } catch (error) {
       logger.error(
