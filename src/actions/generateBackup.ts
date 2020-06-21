@@ -18,13 +18,16 @@ logger.setLabel(label);
  */
 export const generateBackup = (): void => {
   const { inputPath, backupPath } = workDirectories;
-  logger.verbose('开始进行meu8文件的备份');
+  logger.verbose('开始进行m3u8文件的备份');
+  logger.warn('资源目录中的m3u8的文件会被程序修复，修复方案为本机资源目录的绝对路径');
+
   logger.info(`资源目录：${inputPath}`, {
     inputPath,
   });
   logger.info(`备份目录：${backupPath}`, {
     backupPath,
   });
+
   const m3u8Files = readM3u8Files();
 
   m3u8Files.forEach((filename: string) => {

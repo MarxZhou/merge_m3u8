@@ -5,7 +5,7 @@ export const workDirectories = {
   inputPath: 'E:/动漫m3u8',
   // 转换格式后的输出路径，该路径中不能存在同名文件，否则会因为无法覆盖而失败
   outputPath: 'E:/FFMpegOutput/videoData',
-  // 采用绝对路径方案的备份文件的保存路径
+  // 原始m3u8文件的备份路径
   backupPath: 'E:/FFMpegOutput/backupM3u8Files',
   // 采用相对路径方案的备份文件的保存路径
   relativeBackupPath: 'E:/FFMpegOutput/relativeBackupM3u8Files',
