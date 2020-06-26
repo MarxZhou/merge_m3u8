@@ -72,6 +72,7 @@ export interface Meta {
   inputPath?: string;
   script?: string;
   code?: number;
+  config?: any;
 }
 
 export interface LoggerToolLevels {

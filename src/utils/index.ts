@@ -61,7 +61,14 @@ export const rename = (filename: string): void => {
 
 export const processCmdParams = (): any => {
   const p: any = {};
-  process.argv.slice(2).forEach((value, index, arr): void => {
+
+  const args = process.argv.slice(2);
+
+  if (args.length === 1) {
+    return { inputPath: args[0] };
+  }
+
+  args.forEach((value, index, arr): void => {
     p[value.slice(1)] = arr[index + 1];
   });
   return p;

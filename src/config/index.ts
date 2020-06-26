@@ -1,5 +1,12 @@
 import { OutputFileTypes } from '@/config/types';
 import { processCmdParams } from '@/utils';
+import LoggerTool from '@/logger';
+
+const label = 'config';
+
+const logger = new LoggerTool();
+
+logger.setLabel(label);
 
 interface DefaultConfig {
   inputPath: string;
@@ -41,6 +48,10 @@ const cmdParams = ((): DefaultConfig => {
 
   return { ...defaultConfig, ...t };
 })();
+
+logger.verbose(`配置信息：${JSON.stringify(cmdParams)}`, {
+  config: cmdParams,
+});
 
 export const workDirectories = {
   // m3u8资源路径
