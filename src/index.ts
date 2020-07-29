@@ -9,6 +9,7 @@ import generateBackup from '@/actions/generateBackup';
 import renameFilesName from '@/actions/renameFilesName';
 import fix from '@/actions/fix';
 import convert from '@/actions/convert';
+import chalk from 'chalk';
 
 const label = 'index';
 
@@ -17,6 +18,8 @@ const logger = new LoggerTool();
 logger.setLabel(label);
 
 logger.verbose('日志系统启动成功');
+
+logger.silly(chalk.redBright('开始之前请务必单独备份m3u8文件！！！！'));
 
 const dev = !!process.env.dev;
 if (dev) {
