@@ -542,10 +542,10 @@ eslint-config-prettier@^6.11.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-plugin-jest@^23.19.0:
-  version "23.19.0"
-  resolved "https://registry.npm.taobao.org/eslint-plugin-jest/download/eslint-plugin-jest-23.19.0.tgz?cache=0&sync_timestamp=1595897752016&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-jest%2Fdownload%2Feslint-plugin-jest-23.19.0.tgz#da9c45a629bf3180269c7d5033afd7f8b910bde5"
-  integrity sha1-2pxFpim/MYAmnH1QM6/X+LkQveU=
+eslint-plugin-jest@^23.20.0:
+  version "23.20.0"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-jest/download/eslint-plugin-jest-23.20.0.tgz?cache=0&sync_timestamp=1596102617915&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-jest%2Fdownload%2Feslint-plugin-jest-23.20.0.tgz#e1d69c75f639e99d836642453c4e75ed22da4099"
+  integrity sha1-4dacdfY56Z2DZkJFPE517SLaQJk=
   dependencies:
     "@typescript-eslint/experimental-utils" "^2.5.0"
 
@@ -584,10 +584,10 @@ eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
   resolved "https://registry.npm.taobao.org/eslint-visitor-keys/download/eslint-visitor-keys-1.3.0.tgz?cache=0&sync_timestamp=1592583183037&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-visitor-keys%2Fdownload%2Feslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
   integrity sha1-MOvR73wv3/AcOk8VEESvJfqwUj4=
 
-eslint@^7.5.0:
-  version "7.5.0"
-  resolved "https://registry.npm.taobao.org/eslint/download/eslint-7.5.0.tgz?cache=0&sync_timestamp=1595098524738&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint%2Fdownload%2Feslint-7.5.0.tgz#9ecbfad62216d223b82ac9ffea7ef3444671d135"
-  integrity sha1-nsv61iIW0iO4Ksn/6n7zREZx0TU=
+eslint@^7.6.0:
+  version "7.6.0"
+  resolved "https://registry.npm.taobao.org/eslint/download/eslint-7.6.0.tgz?cache=0&sync_timestamp=1596237817551&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint%2Fdownload%2Feslint-7.6.0.tgz#522d67cfaea09724d96949c70e7a0550614d64d6"
+  integrity sha1-Ui1nz66glyTZaUnHDnoFUGFNZNY=
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.10.0"
@@ -1475,11 +1475,6 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-slash@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npm.taobao.org/slash/download/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
-  integrity sha1-ZTm+hwwWWtvVJAIg2+Nh8bxNRjQ=
-
 slice-ansi@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/slice-ansi/download/slice-ansi-2.1.0.tgz#cacd7693461a637a5788d92a7dd4fba068e81636"
@@ -1657,7 +1652,7 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@^1.10.0, tslib@^1.7.1, tslib@^1.8.1:
+tslib@^1.13.0, tslib@^1.7.1, tslib@^1.8.1:
   version "1.13.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
   integrity sha1-yIHhPMcBWJTtkUhi0nZDb6mkcEM=
@@ -1676,10 +1671,10 @@ tslint-plugin-prettier@^2.3.0:
     lines-and-columns "^1.1.6"
     tslib "^1.7.1"
 
-tslint@^6.1.2:
-  version "6.1.2"
-  resolved "https://registry.npm.taobao.org/tslint/download/tslint-6.1.2.tgz#2433c248512cc5a7b2ab88ad44a6b1b34c6911cf"
-  integrity sha1-JDPCSFEsxaeyq4itRKaxs0xpEc8=
+tslint@^6.1.3:
+  version "6.1.3"
+  resolved "https://registry.npm.taobao.org/tslint/download/tslint-6.1.3.tgz?cache=0&sync_timestamp=1596215026022&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslint%2Fdownload%2Ftslint-6.1.3.tgz#5c23b2eccc32487d5523bd3a470e9aa31789d904"
+  integrity sha1-XCOy7MwySH1VI706Rw6aoxeJ2QQ=
   dependencies:
     "@babel/code-frame" "^7.0.0"
     builtin-modules "^1.1.1"
@@ -1692,7 +1687,7 @@ tslint@^6.1.2:
     mkdirp "^0.5.3"
     resolve "^1.3.2"
     semver "^5.3.0"
-    tslib "^1.10.0"
+    tslib "^1.13.0"
     tsutils "^2.29.0"
 
 tsutils@^2.29.0:
@@ -1728,12 +1723,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript-transform-paths@^1.1.14:
-  version "1.1.14"
-  resolved "https://registry.npm.taobao.org/typescript-transform-paths/download/typescript-transform-paths-1.1.14.tgz#4a3800a04977a527270980488f9c93055a31e474"
-  integrity sha1-SjgAoEl3pScnCYBIj5yTBVox5HQ=
-  dependencies:
-    slash "^3.0.0"
+typescript-transform-paths@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/typescript-transform-paths/download/typescript-transform-paths-2.0.0.tgz#7dfaded593c45aba209009b820fc098a11862fa6"
+  integrity sha1-ffre1ZPEWrogkAm4IPwJihGGL6Y=
 
 typescript-tslint-plugin@^0.5.5:
   version "0.5.5"
