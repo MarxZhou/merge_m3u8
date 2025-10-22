@@ -86,17 +86,3 @@ ts-node ./src/index.ts -配置项 参数值
 ## 错误提示
 
 如果在转换格式时，控制台中出现了 `error` 错误，一般原因为当前m3u8文件的资源目录和目录中文件已经丢失
-
-## 赞赏
-
-如果这个包对您有帮助，且您有意愿的话，您可以通过以下方式对我进行支持，非常感谢。
-
-如果您能够进行大额打赏的话，我将会成为您的JS、NodeJS开发顾问。
-
-您的任何提问我都会在24小时内进行回复，您可通过邮箱 `marxzhou@aliyun.com` 联系我获取我最新的联系方式。
-
-<div style='position:relative;'>
-<img src="./assets/ali.jpg" alt="支付宝" style="zoom:35%;display:inline;float: left" />
-<img src="./assets/wechat.png" alt="微信" style="zoom:26%;display:inline;flex: 1;float:left;" />
-<div style='clear: both' />
-</div>
